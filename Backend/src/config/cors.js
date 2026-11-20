@@ -21,7 +21,12 @@ const corsOptions = {
       'https://jptech.elogixit.com',
       'https://growlatics.elogixit.com',
       'https://clovernest.elogixit.com',
-      'https://integral-kid-legally.ngrok-free.app'
+      'https://integral-kid-legally.ngrok-free.app',
+      // Extra allowed origins from env, comma-separated (e.g. CRM + admin portal domains)
+      ...(process.env.CORS_ORIGINS || '')
+        .split(',')
+        .map((o) => o.trim().replace(/\/$/, ''))
+        .filter(Boolean)
     ];
 
     // In production, you might want to be more restrictive
